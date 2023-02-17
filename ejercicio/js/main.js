@@ -9,6 +9,7 @@ const buttonAdd = document.querySelector('.js-btn-add');
 const buttonCancelForm = document.querySelector('.js-btn-cancel');
 const inputDesc = document.querySelector('.js-input-desc');
 const inputPhoto = document.querySelector('.js-input-photo');
+const inputRace = document.querySelector('.js-input-race');
 const inputName = document.querySelector('.js-input-name');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMessageError = document.querySelector('.js-label-error');
@@ -82,26 +83,32 @@ function handleClickNewCatForm(event) {
 //Adicionar nuevo gatito
 function addNewKitten(event) {
     event.preventDefault();
-    const newKittenDataObjetc = {
-        image: "",
-        name: "",
-        desc: "",
-        race: ""
-    };
-    kittenDataList.push(newKittenDataObjetc);
+    const valueName = inputName.value;
     const valueDesc = inputDesc.value;
     const valuePhoto = inputPhoto.value;
-    const valueName = inputName.value;
-    if (valueDesc === "" && valuePhoto === "" && valueName === "") {
+    const valueRace = inputRace.value; 
+    const newKittenDataObject = {
+        name: valueName,
+        desc: valueDesc,
+        photo: valuePhoto,
+        race: valueRace
+    };
+    // const valueDesc = inputDesc.value;
+    // const valuePhoto = inputPhoto.value;
+    // const valueName = inputName.value;
+    if (valueDesc === "" || valuePhoto === "" || valueName === "" || valueRace === "") {
         labelMessageError.innerHTML = "¡Uy! parece que has olvidado algo";
     } 
-    else if (valueDesc === "" && valuePhoto === "" && valueName === ""){
-        labelMesageError.innerHTML = 'Mola! Un nuevo gatito en Adalab!';
-    }
-    else {
-        if (valueDesc !== "" && valuePhoto !== "" && valueName !== "") {
-            labelMessageError.innerHTML = "";
-        }
+    else if(valueDesc !== "" && valuePhoto !== "" && valueName !== "" && valuePhoto !== "" && valueRace!== ""){
+    labelMessageError.innerHTML = 'Mola! Un nuevo gatito en Adalab!';
+    kittenDataList.push(newKittenDataObject);
+    renderKittenList(kittenDataList);
+    newFormElement.classList.add("collapsed");
+    inputDesc.value = "";
+    inputPhoto.value = "";
+    inputName.value = "";
+    inputRace.value = "";
+    labelMessageError.innerHTML = '';
     }
 }
 //Cancelar la búsqueda de un gatito
@@ -111,19 +118,23 @@ function cancelNewKitten(event) {
     inputDesc.value = "";
     inputPhoto.value = "";
     inputName.value = "";
+    inputRace.value = "";
+    labelMessageError.innerHTML = '';
 }
 
 //Filtrar por descripción
-function filterKitten(event) {
-    event.preventDefault();
-    const descrSearchText = input_search_desc.value;
-    listElement.innerHTML = "";
-    for (const kittenItem of kittenDataList) {
-        if (kittenItem.desc.includes(descrSearchText)) {
-            listElement.innerHTML += renderKitten(kittenItem);
-        }
-    }
-}
+// function filterKitten(event) {
+//     event.preventDefault();
+//     const descrSearchText = input_search_desc.value;
+//     listElement.innerHTML = "";
+//     for (const kittenItem of kittenDataList) {
+//         if (kittenItem.desc.includes(descrSearchText)) {
+//             listElement.innerHTML += renderKitten(kittenItem);
+//         }
+//     }
+// }
+
+const filterKitten = kittenDataList.filter(()=>);
 
 //Mostrar el litado de gatitos en el HTML
 renderKittenList(kittenDataList);
