@@ -14,6 +14,7 @@ const inputName = document.querySelector('.js-input-name');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMessageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
+const input_search_race = document.querySelector('.js-input-race');
 
 
 //Objetos con cada gatito
@@ -122,22 +123,26 @@ function cancelNewKitten(event) {
     labelMessageError.innerHTML = '';
 }
 
-//Filtrar por descripción
-// function filterKitten(event) {
-//     event.preventDefault();
-//     const descrSearchText = input_search_desc.value;
-//     listElement.innerHTML = "";
-//     for (const kittenItem of kittenDataList) {
-//         if (kittenItem.desc.includes(descrSearchText)) {
-//             listElement.innerHTML += renderKitten(kittenItem);
-//         }
-//     }
-// }
+// //Filtrar por descripción
+function filterKitten(event) {
+    event.preventDefault();
+    const descrSearchText = input_search_desc.value;
+    const raceSearchText = input_search_race.value;
+    listElement.innerHTML = ""; // limpiar el campo
+    // for (const kittenItem of kittenDataList) {
+    //     if (kittenItem.desc.includes(descrSearchText)) {
+    //         listElement.innerHTML += renderKitten(kittenItem);
+    //     }
+    // }
+    const filterKitten = kittenDataList
+        .filter((kat)=> kat.desc.includes(descrSearchText)
+        // kat es un parámetro y es el objeto completo del array. kat sería como el kittenItem. 
+    )
+        .filter((raceFiltered)=> raceFiltered.race.includes(raceSearchText)
+    )
+    renderKittenList(filterKitten); // Mostrar el litado de gatitos en el HTML
+}
 
-const filterKitten = kittenDataList.filter(()=>);
-
-//Mostrar el litado de gatitos en el HTML
-renderKittenList(kittenDataList);
 
 //Eventos
 linkNewFormElememt.addEventListener("click", handleClickNewCatForm);
