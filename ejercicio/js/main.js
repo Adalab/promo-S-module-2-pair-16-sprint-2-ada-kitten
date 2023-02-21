@@ -14,7 +14,10 @@ const inputName = document.querySelector('.js-input-name');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMessageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
-const input_search_race = document.querySelector('.js-input-race');
+const input_search_race = document.querySelector('.js_in_search_race');
+
+const GITHUB_USER = 'Nuriacode';//(nuria)
+const SERVER_URL = `https://dev.adalab.es/api/kittens/${GITHUB_USER}`;//(nuria)
 
 
 //Objetos con cada gatito
@@ -37,7 +40,8 @@ const kittenData_3 = {
     race: "Maine Coon",
 };
 
-const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+// const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+let kittenDataList = []; //(nuria)
 
 //Funciones
 function renderKitten(kittenData) {
@@ -128,21 +132,41 @@ function filterKitten(event) {
     event.preventDefault();
     const descrSearchText = input_search_desc.value;
     const raceSearchText = input_search_race.value;
-    listElement.innerHTML = ""; // limpiar el campo
+    listElement.innerHTML = ''; // limpiar el campo
     // for (const kittenItem of kittenDataList) {
     //     if (kittenItem.desc.includes(descrSearchText)) {
     //         listElement.innerHTML += renderKitten(kittenItem);
     //     }
     // }
     const filterKitten = kittenDataList
-        .filter((kat)=> kat.desc.includes(descrSearchText)
+        .filter((kat)=> kat.desc.includes(descrSearchText))
         // kat es un parámetro y es el objeto completo del array. kat sería como el kittenItem. 
-    )
-        .filter((raceFiltered)=> raceFiltered.race.includes(raceSearchText)
-    )
+        .filter((racefilter)=> racefilter.race.includes(raceSearchText));
+    
     renderKittenList(filterKitten); // Mostrar el litado de gatitos en el HTML
 }
 
+
+
+//Fench para el listado de gatitos (Nuria)
+
+ fetch(SERVER_URL, {
+  method: 'GET',
+  headers: {'Content-Type': 'application/json'},
+})
+    .then((responde) => responde.json())
+    .then((data)=>{
+         console.log(data);
+         kittenDataList = data.results;
+         renderKittenList(kittenDataList);
+     }).catch(error => {
+        console.error(error);
+     });
+
+
+
+//Mostrar el listado de gatitos
+renderKittenList(kittenDataList);
 
 //Eventos
 linkNewFormElememt.addEventListener("click", handleClickNewCatForm);
