@@ -16,8 +16,7 @@ const labelMessageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
 const input_search_race = document.querySelector('.js_in_search_race');
 
-const GITHUB_USER = 'Nuriacode';//(nuria)
-const SERVER_URL = `https://dev.adalab.es/api/kittens/${GITHUB_USER}`;//(nuria)
+
 
 
 //Objetos con cada gatito
@@ -41,7 +40,7 @@ const kittenData_3 = {
 };
 
 // const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
-let kittenDataList = []; //(nuria)
+
 
 //Funciones
 function renderKitten(kittenData) {
@@ -148,7 +147,17 @@ function filterKitten(event) {
 
 
 
-//Fench para el listado de gatitos (Nuria)
+//Fench para el listado de gatitos 
+let kittenDataList = []; 
+const GITHUB_USER = 'Nuriacode';
+const SERVER_URL = `https://dev.adalab.es/api/kittens/${GITHUB_USER}`;
+const kittenListStored = JSON.parse(localStorage.getItem('kittensList'));
+console.log(kittenListStored);
+
+if(kittenListStored !== null){
+    kittenDataList = kittenListStored;
+    renderKittenList(kittenDataList);
+} else {
 
  fetch(SERVER_URL, {
   method: 'GET',
@@ -162,8 +171,7 @@ function filterKitten(event) {
      }).catch(error => {
         console.error(error);
      });
-
-
+}
 
 //Mostrar el listado de gatitos
 renderKittenList(kittenDataList);
