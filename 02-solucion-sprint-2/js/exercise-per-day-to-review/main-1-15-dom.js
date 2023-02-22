@@ -3,20 +3,20 @@
 /*Para practicar esta última lección puedes cambiar el innerHTML de las funciones renderKitten() por sentencias de creación de elementos.*/
 
 function renderKitten(kittenData) {
-  const kitten = `<li class="card">
-    <article>
-      <img
-        class="card_img"
-        src=${kittenData.image}
-        alt="gatito"
-      />
-      <h3 class="card_title">${kittenData.name}</h3>
-      <h3 class="card_race">${kittenData.race}</h3>
-      <p class="card_description">
-      ${kittenData.desc}
-      </p>
-    </article>
-    </li>`;
+  // const kitten = `<li class="card">
+  //   <article>
+  //     <img
+  //       class="card_img"
+  //       src=${kittenData.image}
+  //       alt="gatito"
+  //     />
+  //     <h3 class="card_title">${kittenData.name}</h3>
+  //     <h3 class="card_race">${kittenData.race}</h3>
+  //     <p class="card_description">
+  //     ${kittenData.desc}
+  //     </p>
+  //   </article>
+  //   </li>`;
 
   const liElement = document.createElement('li');
   liElement.classList.add('card');

@@ -42,29 +42,53 @@ const kittenData_3 = {
 // const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
 
 
-//Funciones
+// //Funciones
+//function renderKitten(kittenData) {
+//     const kitten = `<li class="card">
+//     <article>
+//       <img
+//         class="card_img"
+//         src=${kittenData.image}
+//         alt="gatito"
+//       />
+//       <h3 class="card_title">${kittenData.name}</h3>
+//       <h3 class="card_race">${kittenData.race}</h3>
+//       <p class="card_description">
+//       ${kittenData.desc}
+//       </p>
+//     </article>
+//     </li>`;
+//     return kitten;
+// }
+
+// innerHTML de la anterior function renderKitten cambiada a DOM avanzado:
+
+//const listElement = document.querySelector('.js-list');
+// kittenData es un parámetro 
 function renderKitten(kittenData) {
-    const kitten = `<li class="card">
-    <article>
-      <img
-        class="card_img"
-        src=${kittenData.image}
-        alt="gatito"
-      />
-      <h3 class="card_title">${kittenData.name}</h3>
-      <h3 class="card_race">${kittenData.race}</h3>
-      <p class="card_description">
-      ${kittenData.desc}
-      </p>
-    </article>
-    </li>`;
-    return kitten;
+  for (const item of listElement) {
+  const liElement = document.createElement('li');
+  liElement.classList.add('list');
+
+  const articleElement = document.createElement('article');
+  const imgElement = document.createElement('img');
+  const nameElement = document.createElement('h3');
+  const textName = document.createTextNode(kittenData.name); // con la URL y el usuario de GitHub podemos acceder al name y a cualquier otro dato
+  const raceElement = document.createElement('h3');   
+  const textRace = document.createTextNode();
+  const descElement = document.createElement('p');
+  const textDesc = document.createTextNode();
+  descElement.appendChild(textDesc);
+
+  return liElement;
+  }
 }
 
+
 function renderKittenList(kittenDataList) {
-    listElement.innerHTML = "";
+    listElement.innerHTML = ""; // listElement = UL del HTML.
     for (const kittenItem of kittenDataList) {
-        listElement.innerHTML += renderKitten(kittenItem);
+        listElement.appendChild(renderKitten(kittenItem)); // esto sería como el innerHTML.
     }
 }
 
@@ -147,7 +171,7 @@ function filterKitten(event) {
 
 
 
-//Fench para el listado de gatitos 
+//Fetch para el listado de gatitos 
 let kittenDataList = []; 
 const GITHUB_USER = 'Nuriacode';
 const SERVER_URL = `https://dev.adalab.es/api/kittens/${GITHUB_USER}`;
